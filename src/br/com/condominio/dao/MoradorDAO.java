@@ -39,6 +39,12 @@ public class MoradorDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        } finally {
+        	try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
         }
 
     }
@@ -61,6 +67,12 @@ public class MoradorDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        } finally {
+        	try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
         }
 
     }
@@ -76,7 +88,7 @@ public class MoradorDAO {
             //nome
             stmt.setString(3, morador.getNome());
             //tipo
-            stmt.setInt(4, morador.getTipo().getId());
+            stmt.setString(4, morador.getTipo());
 
             stmt.execute();
             return true;
@@ -84,6 +96,12 @@ public class MoradorDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+        	try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
         }
     }
 
@@ -98,7 +116,7 @@ public class MoradorDAO {
             //nome
             stmt.setString(3, morador.getNome());
             //tipo
-            stmt.setInt(4, morador.getTipo().getId());
+            stmt.setString(4, morador.getTipo());
 
             stmt.execute();
             return true;
@@ -106,6 +124,12 @@ public class MoradorDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+        	try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
         }
     }
     
@@ -122,6 +146,12 @@ public class MoradorDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+        	try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
         }
     }
 }
