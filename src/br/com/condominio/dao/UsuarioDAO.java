@@ -6,35 +6,34 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
 
-import br.com.condominio.models.Morador;
+import br.com.condominio.models.Usuario;
 
-public class MoradorDAO {
+public class UsuarioDAO {
 	
 	private Connection con;
 
-	public MoradorDAO(Connection con) {
+	public UsuarioDAO(Connection con) {
 		this.con = Conexao.getConexao();
 	}
 	
-	public List<Morador> buscaTodos() {
-		Morador morador = new Morador();
-		List<Morador> moradores = null;
+	public List<Usuario> buscaTodos() {
+		Usuario usuario = new Usuario();
+		List<Usuario> usuarios = null;
         try {
         	
-            String sql = "SELECT * FROM morador";
+            String sql = "SELECT * FROM usuario";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-            	morador.setId(rs.getInt("id"));
-            	morador.setNome(rs.getString("nome"));
-            	morador.setApartamento(rs.getInt("apartamento"));
-            	moradores.add(morador);
+            	usuario.setId(rs.getInt("id"));
+            	usuario.setLogin("login");
+            	usuario.setSenha("senha");
+            	usuarios.add(usuario);
             }
 
-            return moradores;
+            return usuarios;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,20 +42,20 @@ public class MoradorDAO {
 
     }
 	
-	public Morador buscaUm(int id) {
-		Morador morador = new Morador();
+	public Usuario buscaUm(int id) {
+		Usuario usuario = new Usuario();
         try {
             String sql = "SELECT * FROM morador WHERE id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-            	morador.setId(rs.getInt("id"));
-                morador.setNome(rs.getString("nome"));
-                morador.setApartamento(rs.getInt("apartamento"));
+            	usuario.setId(rs.getInt("id"));
+            	usuario.setLogin("login");
+            	usuario.setSenha("senha");
             }
 
-            return morador;
+            return usuario;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,18 +64,16 @@ public class MoradorDAO {
 
     }
 
-    public boolean inserir(Morador morador) {
+    public boolean inserir(Usuario usuario) {
         try {
-            String sql = "INSERT INTO morador VALUES (null, ?, ?, ?, ?)";
+            String sql = "INSERT INTO usuario VALUES (null, ?, ?, ?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             //id usuario
-            stmt.setInt(1, morador.getUsuario().getId());
+            stmt.setInt(1, usuario.getId());
             //apartamento
-            stmt.setInt(2, morador.getApartamento());
+            stmt.setString(2, usuario.getLogin());
             //nome
-            stmt.setString(3, morador.getNome());
-            //tipo
-            stmt.setInt(4, morador.getTipo().getId());
+            stmt.setString(3, usuario.getSenha());
 
             stmt.execute();
             return true;
@@ -87,35 +84,32 @@ public class MoradorDAO {
         }
     }
 
-    public boolean atualizar(Morador morador) {
+    public boolean atualizar(Usuario usuario) {
         try {
-            String sql = "UPDATE morador SET (null, ?, ?, ?, ?)";
+        	String sql = "INSERT INTO usuario VALUES (null, ?, ?, ?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             //id usuario
-            stmt.setInt(1, morador.getUsuario().getId());
+            stmt.setInt(1, usuario.getId());
             //apartamento
-            stmt.setInt(2, morador.getApartamento());
+            stmt.setString(2, usuario.getLogin());
             //nome
-            stmt.setString(3, morador.getNome());
-            //tipo
-            stmt.setInt(4, morador.getTipo().getId());
+            stmt.setString(3, usuario.getSenha());
 
             stmt.execute();
             return true;
-
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
     
-    public boolean deletar(int apartamento){
+    public boolean deletar(int id){
     	
     	try {
-            String sql = "DELETE morador WHERE apartamento = ?";
+            String sql = "DELETE usuario WHERE id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             //apartamento
-            stmt.setInt(1, apartamento);
+            stmt.setInt(1, id);
             stmt.execute();
             return true;
 
