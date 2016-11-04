@@ -16,8 +16,10 @@ public class Morador {
     private int Apartamento;
 
     private String Nome;
+    
+    private String Cpf;
 
-    private Tipo Tipo;
+    private String Tipo;
 
     public int getId() {
         return Id;
@@ -35,11 +37,11 @@ public class Morador {
         Usuario = usuario;
     }
 
-    public Tipo getTipo() {
+    public String getTipo() {
         return Tipo;
     }
 
-    public void setTipo(Tipo tipo) {
+    public void setTipo(String tipo) {
         Tipo = tipo;
     }
 
@@ -59,4 +61,13 @@ public class Morador {
         Nome = nome;
     }
 
+	public String getCpf() {
+		return Cpf;
+	}
+
+	public void setCpf(String cpf) {
+		Cpf = cpf;
+	}
+
+    
 }

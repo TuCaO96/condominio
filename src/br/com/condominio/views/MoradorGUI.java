@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 public class MoradorGUI {
 
 	private JFrame frame;
+	
+	private MoradorController moradorController;
 
 	/**
 	 * Launch the application.
@@ -56,7 +58,7 @@ public class MoradorGUI {
 			    chooser.setFileFilter(filter);
 			    int returnVal = chooser.showOpenDialog(frame);
 			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-					MoradorController.lerPagamento(chooser.getSelectedFile().getAbsoluteFile());
+					moradorController.lerPagamento(chooser.getSelectedFile().getAbsoluteFile());
 			    }
 			}
 		});

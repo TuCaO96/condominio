@@ -20,6 +20,10 @@ public class Usuario {
     public String getLogin() {
         return Login;
     }
+    
+    public String getSenha() {
+        return Senha;
+    }
 
     public void setLogin(String login) {
         Login = login;
@@ -28,4 +32,9 @@ public class Usuario {
     public void setSenha(String senha) {
         Senha = senha;
     }
+
+	public void setId(int id) {
+		Id = id;
+		
+	}
 }
