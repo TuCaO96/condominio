@@ -2,6 +2,7 @@ CREATE TABLE morador(
   id number(10),
   usuario_id number(10),
   apartamento number(10),
+  cpf varchar2(255),
   nome varchar2(255),
   tipo varchar2(255)
 );
