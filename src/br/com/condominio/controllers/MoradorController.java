@@ -2,16 +2,10 @@ package br.com.condominio.controllers;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.io.File;
 
-import br.com.condominio.models.Morador;
 import br.com.condominio.models.Pagamento;
 
 /**
@@ -22,29 +16,28 @@ import br.com.condominio.models.Pagamento;
 public class MoradorController {
     
     public List<Pagamento> lerPagamento(File f) {
-    	List<Pagamento> pagamentos = null;
+    	ArrayList<Pagamento> pagamentos = new ArrayList<Pagamento>();
     	
 		try {
-			
 		    BufferedReader in;
 		    in = new BufferedReader(new FileReader(f));
-			String linha = in.readLine();
-			System.out.println("Tamanho string: " + linha.length());
-			while(linha != null){
-				//pega substring
-				String cnpj = linha.substring(0, 14);
-				String cpf = linha.substring(14, 24);
-				String data = linha.substring(25, 31);
-				String valor = linha.substring(31, 39);
-				//adiciona dados ao objeto
-				Pagamento pagamento = new Pagamento();
-				pagamento.setCnpj(cnpj);
-				pagamento.setCpf(cpf);
-				pagamento.setData(data);
-				pagamento.setValor(valor);
-				pagamentos.add(pagamento);
-			}
+			String linha;
 			
+			while((linha = in.readLine()) != null){	
+				Pagamento pagamento = new Pagamento();
+				//pega substring
+				pagamento.setCnpj(linha.substring(0, 14));
+				System.out.println(pagamento.getCnpj());
+				pagamento.setCpf(linha.substring(14, 24));
+				System.out.println(pagamento.getCpf());
+				pagamento.setData(linha.substring(25, 31));
+				System.out.println(pagamento.getData());
+				pagamento.setValor(linha.substring(31, 39));
+				System.out.println(pagamento.getValor());
+				pagamentos.add(pagamento);
+				System.out.println("----------");
+			}
+						
 			in.close();
 		} catch (Exception eX) {
 			System.out.println("Erro ao abrir arquivo. " + eX.getMessage());
